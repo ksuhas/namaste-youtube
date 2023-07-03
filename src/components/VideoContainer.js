@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import VideoCard, {AdVideoCard} from './VideoCard'
+import VideoCard, { AdVideoCard } from './VideoCard'
 import { YOUTUBE_VIDEO_API } from '../utils/constants';
 import { Link } from 'react-router-dom';
+import Shimmer from './Shimmer';
 
 const VideoContainer = () => {
 
@@ -20,6 +21,8 @@ const VideoContainer = () => {
       console.error(e);
     }
   }
+
+  if (!videos.length) return <Shimmer />
 
   return (
     <div className='flex flex-wrap justify-start'>

@@ -8,7 +8,8 @@ import harmBurgerIcon from '../assets/icons/hamburger.svg';
 import mickIcon from '../assets/icons/mike.svg';
 import createIcon from '../assets/icons/create.svg';
 import bellIcon from '../assets/icons/bell.svg';
-// import searcIcon from '../assets/icons/se'
+import { useNavigate } from 'react-router-dom';
+
 const Header = () => {
 
    const [searchQuery, setSearchQuery] = useState("");
@@ -17,6 +18,7 @@ const Header = () => {
 
    const searchCache = useSelector(store => store.search);
    const dispatch = useDispatch();
+   let navigate = useNavigate();
 
    useEffect(() => {
       const timer = setTimeout(() => {
@@ -40,6 +42,12 @@ const Header = () => {
       }))
    }
 
+   const handleSuggestion = (event) => {
+      setSearchQuery(event.target.innerText);
+      setShowSuggestions(false);
+      navigate('/results?search_query=' + encodeURI(event.target.innerText));
+   }
+
    const toggleMenuHandler = () => {
       dispatch(toggleMenu());
    }
@@ -51,7 +59,9 @@ const Header = () => {
                <div className='w-10 h-10 hover:rounded-full hover:bg-gray-100 cursor-pointer'>
                   <img onClick={toggleMenuHandler} className='h-6 mt-2 ml-2' alt='harmburger-icon' src={harmBurgerIcon} />
                </div>
-               <img className='h-6 ml-3 cursor-pointer' alt='youtube-icon' src={youtubeIcon} />
+               <a href="/">
+                  <img className='h-6 ml-3 cursor-pointer' alt='youtube-icon' src={youtubeIcon} />
+               </a>
             </div>
             <div className='relative'>
                <div className='flex flex-row relative'>
@@ -67,12 +77,12 @@ const Header = () => {
                   <div className='absolute bg-white w-[560px] max-h-[400px] shadow-lg border rounded-lg overflow-y-auto left-3 top-10 z-50'>
                      <ul className='py-3'>
                         {
-                           suggestions?.map((sugg, index) => {
-                              return (<li onClick={() => { setSearchQuery(sugg) }} key={index} className='my-1 p-1 hover:bg-gray-100 cursor-pointer'>
-                                 <img className='mr-5 h-4 ml-3 inline-block' alt='search-icon' src='https://cdn-icons-png.flaticon.com/512/482/482631.png' />
+                           suggestions?.map((sugg) =>
+                              <li key={sugg} onMouseDown={(e) => handleSuggestion(e)} className='my-1 p-1 hover:bg-gray-100 cursor-pointer'>
+                                 <img  className='mr-5 h-4 ml-3 inline-block' alt='search-icon' src='https://cdn-icons-png.flaticon.com/512/482/482631.png' />
                                  <span>{sugg}</span>
-                              </li>)
-                           })
+                              </li>
+                           )
                         }
                      </ul>
                   </div>

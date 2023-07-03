@@ -23,6 +23,11 @@ const WatchVideo = () => {
     const isMenuOpen = useSelector(store => store.app.isMenuOpen);
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, [])
+
     useEffect(() => {
         dispatch(closeMenu());
         getVideoDetails();
