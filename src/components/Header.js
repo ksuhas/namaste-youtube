@@ -73,7 +73,7 @@ const Header = () => {
                   {searchQuery && <button onClick={() => setSearchQuery("")} className='absolute hover:bg-gray-200 hover:rounded-full w-9 h-9 right-[8.2rem] top-[2px]'>X</button>}
                </div>
                {
-                  (showSuggestions && suggestions.length > 0) &&
+                  (showSuggestions && suggestions?.length > 0) &&
                   <div className='absolute bg-white w-[560px] max-h-[400px] shadow-lg border rounded-lg overflow-y-auto left-3 top-10 z-50'>
                      <ul className='py-3'>
                         {

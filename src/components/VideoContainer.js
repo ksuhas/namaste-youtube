@@ -22,7 +22,7 @@ const VideoContainer = () => {
     }
   }
 
-  if (!videos.length) return <Shimmer />
+  if (!videos?.length) return <Shimmer />
 
   return (
     <div className='flex flex-wrap justify-start'>
