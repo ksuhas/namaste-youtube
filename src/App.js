@@ -6,6 +6,7 @@ import store from "./utils/store";
 import MainContainer from './components/MainContainer';
 import WatchVideo from "./components/WatchVideo";
 import SearchResultContainer from "./components/SearchResultContainer";
+import Error from './components/Error';
 
 const Layout = () => {
   return (
@@ -19,6 +20,7 @@ const Layout = () => {
 const appRouter = createBrowserRouter([{
   path: "/",
   element: <Layout />,
+  errorElement: <Error />,
   children: [
     {
       path: "/",
